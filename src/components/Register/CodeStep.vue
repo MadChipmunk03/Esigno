@@ -2,7 +2,9 @@
     <div class="pa-1">
             <v-row>
                 <v-col><h2>Zadejte kód</h2></v-col>
-                <v-col><p class="float-right">Máte účet? Přihlásit se</p></v-col>
+                <v-col>
+                    <p class="float-right"><router-link :to="{ name: 'login' }">Zpět na příhlášení</router-link></p>
+                </v-col>
             </v-row>
             <v-card-text class="px-0">Potřebujeme ověřit vaši identitu, zadejte prosím ověřovací PIN kód, který jsme vám poslali na e-mail <span class="font-weight-bold">{{ email }}</span></v-card-text>
 
@@ -26,13 +28,14 @@
             <v-divider class="my-4"/>
 
             <p class="mb-0">Nepřišel Vám e-mail? Prosím zkontrolujte spam.</p>
-            <a class="text-decoration-underline" @click="resendCode">Zaslat znovu kód</a>
+            <a class="text-decoration-underline" href="https://example.com/">Zaslat znovu kód</a>
     </div>
 </template>
 
 <script lang="ts">
 import axios from 'axios';
 import Vue from 'vue';
+//nainstalovaná komponenta nepodporuje typescript
 import PincodeInput from 'vue-pincode-input';
 
 export default Vue.extend({
@@ -60,16 +63,11 @@ export default Vue.extend({
                 code: this.code
             })
             .then((response) => {
-                console.log(response);
                 if(response.status === 200) this.$emit('next-step');
             })
             .catch((error) => {
-                console.log(error);
                 if(error.response.status === 400) this.invalidCode = true
             });
-        },
-        resendCode(): void {
-            console.error('🧨 Not Implemented')
         }
     }
 });

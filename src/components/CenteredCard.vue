@@ -3,7 +3,7 @@
         <v-row align="center" no-gutters style="height: 100vh;">
         <v-spacer />
         <v-col>
-            <v-card width="500" elevation="12">
+            <v-card :width="cardWidth" elevation="12" color="#F7F9FA">
                 <slot></slot>
             </v-card>
         </v-col>
@@ -17,11 +17,12 @@ import Vue from 'vue';
 
 export default Vue.extend({
     name: 'CenteredCard',
-    data() {
-        return {
-            message: 'CenteredCard'
-        };
-    },
+    props: {
+        cardWidth: {
+            type: Number,
+            default: 500
+        }
+    }
 });
 </script>
 

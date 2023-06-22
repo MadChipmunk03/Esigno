@@ -7,14 +7,18 @@ Vue.use(Vuetify);
 export default new Vuetify({
   theme: {
     options: { customProperties: true },
+    dark: false,
     themes: {
       light: {
-        // primary: colors.amber,
-        bambiBlue: '#2A92AB',
-      },
-      dark: {
-        // primary: colors.amber,
-        bambiBlue: '#2A92AB',
+        primary: '#327DDA',
+        successText: '#409230',
+        primaryText: '#327DDA',
+        warningText: '#E47410',
+        errorText: '#E4162F',
+        successBg: '#E2EFE0',
+        primaryBg: '#E0ECF9',
+        warningBg: '#FBEADB',
+        errorBg: '#FBDCE0'
       },
     },
   },

@@ -1,10 +1,10 @@
 <template>
-    <v-sheet class="mb-4 mt-8 pa-4" :color="`${color} lighten-4`" rounded>
+    <v-sheet class="mb-4 mt-8 pa-4" :color="`${backgroundColor}`" rounded width="100%">
         <v-row no-gutters>
             <div class="mr-4">
-                <v-icon :color="color"> {{ icon }} </v-icon>
+                <v-icon :color="textColor"> {{ icon }} </v-icon>
             </div>
-            <v-col><p class="mb-0" :class="`${color}--text`">{{ message }}</p></v-col>
+            <v-col><p class="mb-0" :class="`${textColor}--text`">{{ message }}</p></v-col>
         </v-row>
     </v-sheet>
 </template>
@@ -18,24 +18,38 @@ export default Vue.extend({
     name: 'MessageBox',
     props: {
         message: {
-            type: String as PropType<MessageTypes>
+            type: String
         },
         type: {
-            type: String,
+            type: String as PropType<MessageTypes>,
             default: 'Info'
         }
     },
     computed: {
-        color(): string{
+        textColor(): string{
             switch(this.type) {
                 case MessageTypes.Success:
-                    return 'light-green'
+                    return 'successText'
                 case MessageTypes.Info:
-                    return 'blue'
+                    return 'primaryText'
                 case MessageTypes.Warning:
-                    return 'orange'
+                    return 'warningText'
                 case MessageTypes.Error:
-                    return 'pink'
+                    return 'errorText'
+                default:
+                    return 'primary'
+            }
+        },
+        backgroundColor(): string {
+            switch(this.type) {
+                case MessageTypes.Success:
+                    return 'successBg'
+                case MessageTypes.Info:
+                    return 'primaryBg'
+                case MessageTypes.Warning:
+                    return 'warningBg'
+                case MessageTypes.Error:
+                    return 'errorBg'
                 default:
                     return 'primary'
             }

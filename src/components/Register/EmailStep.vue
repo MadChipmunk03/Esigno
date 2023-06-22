@@ -3,11 +3,13 @@
         <ValidationForm :handleSubmit="registerMail" @form="(vld) => validator = vld">
             <v-row>
                 <v-col><h2>Registrace</h2></v-col>
-                <v-col><p class="float-right">Máte účet? Přihlásit se</p></v-col>
+                <v-col><p class="float-right">
+                    Máte účet? <router-link :to="{ name: 'login' }">Přihlásit se</router-link>
+                </p></v-col>
             </v-row>
             <v-card-text class="px-0">Na e-mail Vám bude zaslán ověřovací kód. Po ověření prosím pokračujte v dalších krocích registrace.</v-card-text>
             <ValidationProvider  rules="required|email" v-slot="{ errors }">
-                <v-text-field v-model="email" solo label="Email" :error-messages="errors" />
+                <v-text-field v-model="email" class="my-4" solo label="Email" :error-messages="errors" />
             </ValidationProvider>
             <v-btn block color="primary" type="submit" :disabled="!formIsValid">Pokračovat</v-btn>
 
@@ -53,11 +55,9 @@ export default Vue.extend({
                 email: this.email
             })
             .then((response) => {
-                console.log(response);
                 if(response.status == 200) this.$emit('add-mail', this.email);
             })
             .catch((error) => {
-                // console.log('🧨', error);
                 if(error.response.status == 400) this.messageBox.show = true;
             });
         }
